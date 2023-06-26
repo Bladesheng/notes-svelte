@@ -1,7 +1,15 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import type { PageData } from "./$types";
 
+  import NoteForm from "./NoteForm.svelte";
+
   export let data: PageData;
+
+  let dialog: HTMLDialogElement;
+  onMount(() => {
+    dialog = document.querySelector("dialog") as HTMLDialogElement;
+  });
 </script>
 
 <svelte:head>
@@ -20,7 +28,15 @@
   </ul>
 </section>
 
-<button>+ Create Note</button>
+<button
+  on:click={() => {
+    dialog.showModal();
+  }}
+>
+  + Create Note
+</button>
+
+<NoteForm />
 
 <style>
 </style>
