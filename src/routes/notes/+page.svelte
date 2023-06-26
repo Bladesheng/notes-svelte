@@ -12,9 +12,9 @@
 
 <section>
   <ul>
-    {#each data.notes as note}
+    {#each data.notes as note (note.id)}
       <li>
-        <a href="/">{note.body}</a>
+        <a href={`/notes/${note.id}`}>{note.body}</a>
       </li>
     {/each}
   </ul>
