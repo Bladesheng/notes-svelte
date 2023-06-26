@@ -1,0 +1,20 @@
+:root {
+  --font-stack: "Roboto", sans-serif;
+
+  --font-color-primary: rgb(139, 148, 158);
+  --font-color-secondary: rgb(240, 246, 252);
+  --font-color-blue: rgb(88, 166, 255);
+  --font-color-red: rgb(248, 81, 73);
+
+  --color-primary: rgb(13, 17, 23);
+  --color-secondary: rgb(22, 27, 34);
+
+  --color-grey-dark: rgb(33, 38, 45);
+  --color-grey-light: rgb(55, 59, 66);
+
+  --color-green-dark: rgb(35, 134, 54);
+  --color-green-light: rgb(56, 145, 75);
+
+  --color-black: rgb(1, 4, 9);
+  --color-red: rgb(218, 54, 51);
+}
