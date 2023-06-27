@@ -14,7 +14,7 @@ export const load: PageServerLoad = async () => {
   return { notes: res };
 };
 
-export const actions: Actions = {
+export const actions = {
   create: async ({ request }) => {
     const data = await request.formData();
     const body = data.get("body");
@@ -41,4 +41,4 @@ export const actions: Actions = {
       throw error(500, "Internal server error");
     }
   },
-};
+} satisfies Actions;

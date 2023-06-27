@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ params }) => {
   }
 };
 
-export const actions: Actions = {
+export const actions = {
   delete: async ({ params }) => {
     const noteId = parseInt(params.slug);
 
@@ -69,4 +69,4 @@ export const actions: Actions = {
       throw error(400, "No matching note was found");
     }
   },
-};
+} satisfies Actions;
