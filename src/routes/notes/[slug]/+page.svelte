@@ -1,8 +1,28 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
   import { enhance } from "$app/forms";
+  import type { PageData } from "./$types";
 
   export let data: PageData;
+  let body = data.note?.body;
+
+  let editing = false;
+
+  function startEdit() {
+    editing = true;
+  }
+
+  function endEdit() {
+    editing = false;
+  }
+
+  function cancelEdit() {
+    endEdit();
+    body = data.note?.body; // reset to previous value
+  }
+
+  function autofocus(element: HTMLInputElement) {
+    element.focus();
+  }
 </script>
 
 <svelte:head>
@@ -11,17 +31,42 @@
 
 <h1>Note</h1>
 
-<p>{data.note?.body}</p>
+<form
+  action="?/edit"
+  method="post"
+  use:enhance={({ cancel }) => {
+    if (body.length === 0) {
+      cancelEdit();
+      cancel();
+    }
 
-<a href="/notes" data-sveltekit-preload-data="off">
-  <button>Go back</button>
-</a>
-
-<button>Edit</button>
-
-<form action="?/delete" method="post" use:enhance>
-  <button type="submit">Delete</button>
+    endEdit();
+  }}
+>
+  {#if editing}
+    <input type="text" name="body" bind:value={body} use:autofocus />
+    <div>
+      <button type="submit">Save</button>
+      <button type="button" on:click={cancelEdit}>Cancel</button>
+    </div>
+  {:else}
+    <p>{body}</p>
+    <button on:click={startEdit}>Edit</button>
+  {/if}
 </form>
 
+<div class="controls">
+  <a href="/notes" data-sveltekit-preload-data="off">
+    <button>Go back</button>
+  </a>
+
+  <form action="?/delete" method="post" use:enhance>
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
 <style>
+  .controls {
+    display: flex;
+  }
 </style>

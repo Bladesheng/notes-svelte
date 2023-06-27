@@ -37,4 +37,29 @@ export const actions: Actions = {
 
     throw redirect(303, "/notes");
   },
+
+  edit: async ({ params, request }) => {
+    const noteId = parseInt(params.slug);
+
+    const data = await request.formData();
+
+    const body = data.get("body");
+
+    if (typeof body !== "string" || body === "") {
+      throw error(400, "No body was provided");
+    }
+
+    try {
+      await prisma.notes.update({
+        where: {
+          id: noteId,
+        },
+        data: {
+          body,
+        },
+      });
+    } catch (err) {
+      throw error(400, "No matching note was found");
+    }
+  },
 };

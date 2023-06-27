@@ -3,12 +3,9 @@
   import { enhance } from "$app/forms";
 
   let dialog: HTMLDialogElement;
-  onMount(() => {
-    dialog = document.querySelector("dialog") as HTMLDialogElement;
-  });
 </script>
 
-<dialog>
+<dialog bind:this={dialog}>
   <form action="?/create" method="post" use:enhance>
     <h1>New note</h1>
 
