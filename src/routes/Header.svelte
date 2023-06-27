@@ -1,6 +1,8 @@
 <script lang="ts">
   import { base } from "$app/paths";
   import { page } from "$app/stores";
+
+  import Account from "./Account.svelte";
 </script>
 
 <header>
@@ -20,11 +22,20 @@
       </li>
     </ol>
   </nav>
+
+  <Account />
 </header>
 
 <style>
   header {
     padding-top: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  nav {
+    grid-column: 2 / 3;
   }
 
   ol {

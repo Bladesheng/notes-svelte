@@ -13,3 +13,7 @@ export function validateStr(value: string, min = 1, max = Infinity) {
 
   return true;
 }
+
+export function validateEmail(value: string) {
+  return /^\S+@\S+\.\S+$/.test(value); // https://regexr.com/7g51q
+}
