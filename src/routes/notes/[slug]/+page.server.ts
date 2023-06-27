@@ -2,6 +2,8 @@ import { prisma } from "$lib/prisma";
 import { error, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 
+import { trimFormField, validateStr } from "$lib/functions";
+
 const user_id = 1;
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -42,11 +44,16 @@ export const actions: Actions = {
     const noteId = parseInt(params.slug);
 
     const data = await request.formData();
-
     const body = data.get("body");
 
-    if (typeof body !== "string" || body === "") {
+    if (typeof body === null) {
       throw error(400, "No body was provided");
+    }
+
+    const bodyTrimmed = trimFormField(body);
+
+    if (!validateStr(bodyTrimmed)) {
+      throw error(400, "Body needs to be at least 1 characters long");
     }
 
     try {
@@ -55,7 +62,7 @@ export const actions: Actions = {
           id: noteId,
         },
         data: {
-          body,
+          body: bodyTrimmed,
         },
       });
     } catch (err) {

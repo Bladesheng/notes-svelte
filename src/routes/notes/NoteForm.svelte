@@ -1,12 +1,24 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { enhance } from "$app/forms";
+
+  import { trimFormField, validateStr } from "$lib/functions";
 
   let dialog: HTMLDialogElement;
 </script>
 
 <dialog bind:this={dialog}>
-  <form action="?/create" method="post" use:enhance>
+  <form
+    action="?/create"
+    method="post"
+    use:enhance={({ cancel, formData, formElement }) => {
+      const bodyTrimmed = trimFormField(formData.get("body"));
+
+      if (!validateStr(bodyTrimmed)) {
+        formElement.reset();
+        cancel();
+      }
+    }}
+  >
     <h1>New note</h1>
 
     <label for="body">Body</label>
@@ -23,7 +35,7 @@
       </button>
 
       <button
-        type="button"
+        type="reset"
         on:click={() => {
           dialog.close();
         }}

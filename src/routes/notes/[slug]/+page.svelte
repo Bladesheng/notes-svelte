@@ -2,6 +2,8 @@
   import { enhance } from "$app/forms";
   import type { PageData } from "./$types";
 
+  import { trimFormField, validateStr } from "$lib/functions";
+
   export let data: PageData;
   let body = data.note?.body;
 
@@ -34,8 +36,11 @@
 <form
   action="?/edit"
   method="post"
-  use:enhance={({ cancel }) => {
-    if (body.length === 0) {
+  use:enhance={({ cancel, formData }) => {
+    const bodyTrimmed = trimFormField(formData.get("body"));
+
+    // don't send request if body didn't change
+    if (!validateStr(bodyTrimmed) || bodyTrimmed === data.note?.body) {
       cancelEdit();
       cancel();
     }
