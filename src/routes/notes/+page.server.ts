@@ -1,13 +1,11 @@
-import { prisma } from "$lib/prisma";
 import { error } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
-
 import { trimFormField, validateStr } from "$lib/functions";
+import type { Actions, PageServerLoad } from "./$types";
 
 const userId = 1;
 
-export const load: PageServerLoad = async () => {
-  const res = await prisma.notes.findMany({
+export const load: PageServerLoad = async ({ locals }) => {
+  const res = await locals.prisma.notes.findMany({
     where: { user_id: userId },
   });
 
@@ -15,7 +13,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-  create: async ({ request }) => {
+  create: async ({ locals, request }) => {
     const data = await request.formData();
     const body = data.get("body");
 
@@ -30,7 +28,7 @@ export const actions = {
     }
 
     try {
-      await prisma.notes.create({
+      await locals.prisma.notes.create({
         data: {
           body: bodyTrimmed,
           user_id: userId,

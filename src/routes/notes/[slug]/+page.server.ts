@@ -1,16 +1,14 @@
-import { prisma } from "$lib/prisma";
 import { error, redirect } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
-
 import { trimFormField, validateStr } from "$lib/functions";
+import type { Actions, PageServerLoad } from "./$types";
 
 const user_id = 1;
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ locals, params }) => {
   const noteId = parseInt(params.slug);
 
   try {
-    const res = await prisma.notes.findFirstOrThrow({
+    const res = await locals.prisma.notes.findFirstOrThrow({
       where: {
         id: noteId,
         user_id,
@@ -24,11 +22,11 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions = {
-  delete: async ({ params }) => {
+  delete: async ({ locals, params }) => {
     const noteId = parseInt(params.slug);
 
     try {
-      await prisma.notes.delete({
+      await locals.prisma.notes.delete({
         where: {
           id: noteId,
         },
@@ -40,7 +38,7 @@ export const actions = {
     throw redirect(303, "/notes");
   },
 
-  edit: async ({ params, request }) => {
+  edit: async ({ locals, params, request }) => {
     const noteId = parseInt(params.slug);
 
     const data = await request.formData();
@@ -57,7 +55,7 @@ export const actions = {
     }
 
     try {
-      await prisma.notes.update({
+      await locals.prisma.notes.update({
         where: {
           id: noteId,
         },

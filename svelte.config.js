@@ -9,6 +9,7 @@ const config = {
     adapter: adapter(),
     alias: {
       $styles: "src/styles",
+      $api: "src/routes/api",
     },
   },
 };

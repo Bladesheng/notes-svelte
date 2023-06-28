@@ -1,6 +1,5 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-
   import { trimFormField, validateStr } from "$lib/functions";
 
   let dialog: HTMLDialogElement;

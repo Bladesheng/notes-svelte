@@ -1,50 +1,34 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import type { FormData } from "$api/types";
 
-  import type { IErrors } from "./registration/+page.server";
+  // form data returned from server form action
+  let form: FormData;
 
-  type IForm = {
-    name?: string;
-    email?: string;
+  let dialog: HTMLDialogElement;
 
-    errors?: IErrors;
-  };
-
-  let form: IForm; // form returned from the actionresult
-
-  let registerDialog: HTMLDialogElement;
-
-  let loggedIn = false;
+  // to allow opening dialog from outside
+  export function showModal() {
+    dialog.showModal();
+  }
 </script>
 
-<div class="account">
-  {#if loggedIn}
-    <span>Username</span>
-    <button>Log Out</button>
-  {:else}
-    <button
-      on:click={() => {
-        registerDialog.showModal();
-      }}
-    >
-      Register</button
-    >
-
-    <button>Log In</button>
-  {/if}
-</div>
-
-<dialog class="register" bind:this={registerDialog}>
+<dialog bind:this={dialog}>
   <form
-    action="/registration?/create"
+    action="/api/registration?/create"
     method="post"
     use:enhance={() => {
       return async ({ result, update }) => {
         if (result.type === "failure" && result.data !== undefined) {
-          // get the errors from server
+          // The server form action always returns the form data to it's coresponding +page.svelte where
+          // you can use $page.form to acces the form data.
+          //
+          // However this form's server action is in /api/.../+page.server.ts which means the form data
+          // is also sent to /api/.../+page.svelte which is the only place where you can use $page.form.
+          // This is the only way to acces form data from anywhere else.
           form = result.data;
         } else {
-          registerDialog.close();
+          dialog.close();
           update();
         }
       };
@@ -76,7 +60,7 @@
       <button
         type="reset"
         on:click={() => {
-          registerDialog.close();
+          dialog.close();
         }}
       >
         Cancel
@@ -86,13 +70,6 @@
 </dialog>
 
 <style>
-  .account {
-    grid-column: 3 / 4;
-    justify-self: end;
-
-    margin-right: 16px;
-  }
-
   dialog {
     position: absolute;
     top: 50%;

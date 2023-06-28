@@ -1,8 +1,7 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import type { PageData } from "./$types";
-
   import { trimFormField, validateStr } from "$lib/functions";
+  import type { PageData } from "./$types";
 
   export let data: PageData;
   let body = data.note?.body;

@@ -1,8 +1,7 @@
 <script lang="ts">
   import { base } from "$app/paths";
   import { page } from "$app/stores";
-
-  import Account from "./Account.svelte";
+  import UserMenu from "$lib/UserMenu.svelte";
 </script>
 
 <header>
@@ -23,7 +22,7 @@
     </ol>
   </nav>
 
-  <Account />
+  <UserMenu />
 </header>
 
 <style>

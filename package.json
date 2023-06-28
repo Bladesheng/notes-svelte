@@ -38,6 +38,8 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "@prisma/client": "^4.16.1"
+    "@lucia-auth/adapter-prisma": "^2.0.0",
+    "@prisma/client": "^4.16.1",
+    "lucia-auth": "^1.8.0"
   }
 }

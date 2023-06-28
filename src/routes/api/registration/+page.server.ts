@@ -1,8 +1,7 @@
-import { prisma } from "$lib/prisma";
-import { error, fail } from "@sveltejs/kit";
-import type { Actions } from "./$types";
-
+import { fail } from "@sveltejs/kit";
+import { auth } from "$lib/server/lucia";
 import { trimFormField, validateStr, validateEmail } from "$lib/functions";
+import type { Actions } from "./$types";
 
 export type IErrors = {
   desc?: string;
@@ -12,7 +11,7 @@ export type IErrors = {
 };
 
 export const actions = {
-  create: async ({ request }) => {
+  create: async ({ request, locals }) => {
     const data = await request.formData();
 
     const name = trimFormField(data.get("name"));
@@ -47,16 +46,28 @@ export const actions = {
     }
 
     try {
-      await prisma.users.create({
-        data: {
-          name,
+      const user = await auth.createUser({
+        primaryKey: {
+          providerId: "name",
+          providerUserId: name,
           password,
-          email,
+        },
+        attributes: {
+          name,
         },
       });
+
+      const session = await auth.createSession(user.userId);
+      locals.auth.setSession(session); // create session cookie
     } catch (err) {
-      console.error(err);
-      throw error(500, "Internal server error");
+      errors.name = "Username is already taken";
+
+      return fail(400, {
+        name,
+        email,
+
+        errors,
+      });
     }
   },
 } satisfies Actions;
