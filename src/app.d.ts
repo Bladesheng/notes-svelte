@@ -1,10 +1,9 @@
-import { prisma } from "$lib/prisma";
-
 declare global {
+  /// <reference types="@sveltejs/kit" />
   namespace App {
     interface Locals {
-      auth: import("lucia").AuthRequest;
-      prisma: typeof prisma; // to get the exact same types as the prisma instance
+      auth: import("lucia-auth").AuthRequest;
+      prisma: import("$lib/prisma").Prisma;
     }
   }
 }
