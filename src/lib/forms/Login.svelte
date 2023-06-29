@@ -40,7 +40,7 @@
       <p>{form.errors.name}</p>
     {/if}
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" value={form?.name ?? ""} />
+    <input type="text" name="name" value={form?.name ?? ""} />
 
     {#if form?.errors?.password}
       <p>{form.errors.password}</p>

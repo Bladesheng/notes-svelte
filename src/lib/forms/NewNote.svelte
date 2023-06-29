@@ -26,7 +26,7 @@
     <h1>New note</h1>
 
     <label for="body">Body</label>
-    <textarea name="body" id="body" rows="3" cols="30" placeholder="Here's an idea for a note..." />
+    <textarea name="body" rows="3" cols="30" placeholder="Here's an idea for a note..." />
 
     <div>
       <button

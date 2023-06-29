@@ -40,19 +40,19 @@
       <p>{form.errors.name}</p>
     {/if}
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" value={form?.name ?? ""} />
+    <input type="text" name="name" value={form?.name ?? ""} />
 
     {#if form?.errors?.password}
       <p>{form.errors.password}</p>
     {/if}
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
+    <input type="password" name="password" />
 
     {#if form?.errors?.email}
       <p>{form.errors.email}</p>
     {/if}
     <label for="email">Email adress</label>
-    <input type="email" name="email" id="email" value={form?.email ?? ""} />
+    <input type="email" name="email" value={form?.email ?? ""} />
 
     <div>
       <button type="submit">Register</button>
