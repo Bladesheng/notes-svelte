@@ -1,4 +1,4 @@
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import { auth } from "$lib/server/lucia";
 import { trimFormField, validateStr } from "$lib/functions";
 import type { Actions } from "./$types";
@@ -61,5 +61,7 @@ export const actions = {
 
     await auth.invalidateSession(session.sessionId);
     locals.auth.setSession(null); // remove session cookie
+
+    throw redirect(303, "/");
   },
 } satisfies Actions;
