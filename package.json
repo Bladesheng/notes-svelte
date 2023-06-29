@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "format": "prettier --ignore-path .eslintignore --write \"**/*.+(js|ts|json|html|svelte|prisma)\"",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.svelte .",
-    "docker": "docker compose up",
     "db:pull": "prisma db pull",
     "db:seed": "prisma db seed",
     "db:push": "prisma db push"
@@ -41,5 +40,8 @@
     "@lucia-auth/adapter-prisma": "^2.0.0",
     "@prisma/client": "^4.16.1",
     "lucia-auth": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=18.14.2"
   }
 }
