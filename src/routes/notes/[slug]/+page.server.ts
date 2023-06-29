@@ -1,44 +1,92 @@
 import { error, redirect } from "@sveltejs/kit";
 import { trimFormField, validateStr } from "$lib/functions";
 import type { Actions, PageServerLoad } from "./$types";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
-const user_id = 1;
+function handleError(err: unknown) {
+  if (err instanceof PrismaClientKnownRequestError) {
+    throw error(404, "Note not found");
+  }
+
+  // instanceof doesn't work with HttpError thrown by the sveltekit error function,
+  // so we have to check if it's HttpError like so:
+  if (typeof err === "object" && err !== null && "status" in err) {
+    throw err;
+  }
+
+  throw error(500, "Internal server error");
+}
+
+// check if the note exists and if the current user has acces to it
+async function checkNote(
+  noteId: number,
+  userId: string,
+  locals: App.Locals,
+  errMessageMethod: string
+) {
+  const note = await locals.prisma.notes.findFirstOrThrow({
+    where: {
+      id: noteId,
+    },
+  });
+
+  if (note.user_id !== userId) {
+    throw error(403, `You are not authorized to ${errMessageMethod} this note`);
+  }
+
+  return note;
+}
 
 export const load: PageServerLoad = async ({ locals, params }) => {
+  const { user } = await locals.auth.validateUser();
+
+  if (!user) {
+    throw error(401, "You need to be logged in to view your notes");
+  }
+
   const noteId = parseInt(params.slug);
 
   try {
-    const res = await locals.prisma.notes.findFirstOrThrow({
-      where: {
-        id: noteId,
-        user_id,
-      },
-    });
+    const note = await checkNote(noteId, user.userId, locals, "view");
 
-    return { note: res };
+    return { note: note };
   } catch (err) {
-    throw error(404, "Note not found");
+    handleError(err);
   }
 };
 
 export const actions = {
   delete: async ({ locals, params }) => {
+    const { user } = await locals.auth.validateUser();
+
+    if (!user) {
+      throw error(401, "You need to be logged in to delete your notes");
+    }
+
     const noteId = parseInt(params.slug);
 
     try {
+      await checkNote(noteId, user.userId, locals, "delete");
+
       await locals.prisma.notes.delete({
         where: {
           id: noteId,
         },
       });
     } catch (err) {
-      throw error(400, "No matching note was found");
+      handleError(err);
     }
 
     throw redirect(303, "/notes");
   },
 
   edit: async ({ locals, params, request }) => {
+    const { user } = await locals.auth.validateUser();
+
+    if (!user) {
+      throw error(401, "You need to be logged in to view your notes");
+    }
+
     const noteId = parseInt(params.slug);
 
     const data = await request.formData();
@@ -55,6 +103,8 @@ export const actions = {
     }
 
     try {
+      await checkNote(noteId, user.userId, locals, "edit");
+
       await locals.prisma.notes.update({
         where: {
           id: noteId,
@@ -64,7 +114,7 @@ export const actions = {
         },
       });
     } catch (err) {
-      throw error(400, "No matching note was found");
+      handleError(err);
     }
   },
 } satisfies Actions;

@@ -1,10 +1,9 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { trimFormField, validateStr } from "$lib/functions";
-  import type { PageData } from "./$types";
+  import { page } from "$app/stores";
 
-  export let data: PageData;
-  let body = data.note?.body;
+  let currentBody = $page.data.note?.body;
 
   let editing = false;
 
@@ -18,7 +17,7 @@
 
   function cancelEdit() {
     endEdit();
-    body = data.note?.body; // reset to previous value
+    currentBody = $page.data.note?.body; // reset to previous value
   }
 
   function autofocus(element: HTMLInputElement) {
@@ -39,7 +38,7 @@
     const bodyTrimmed = trimFormField(formData.get("body"));
 
     // don't send request if body didn't change
-    if (!validateStr(bodyTrimmed) || bodyTrimmed === data.note?.body) {
+    if (!validateStr(bodyTrimmed) || bodyTrimmed === $page.data.note?.body) {
       cancelEdit();
       cancel();
     }
@@ -48,13 +47,13 @@
   }}
 >
   {#if editing}
-    <input type="text" name="body" bind:value={body} use:autofocus />
+    <input type="text" name="body" bind:value={currentBody} use:autofocus />
     <div>
       <button type="submit">Save</button>
       <button type="button" on:click={cancelEdit}>Cancel</button>
     </div>
   {:else}
-    <p>{body}</p>
+    <p>{currentBody}</p>
     <button on:click={startEdit}>Edit</button>
   {/if}
 </form>
