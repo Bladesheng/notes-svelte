@@ -60,7 +60,7 @@ export const actions = {
     const { user } = await locals.auth.validateUser();
 
     if (!user) {
-      throw error(401, "You need to be logged in to delete your notes");
+      throw error(401, "You need to be logged in to view your notes");
     }
 
     const noteId = parseInt(params.slug);
