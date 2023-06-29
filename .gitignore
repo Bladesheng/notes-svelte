@@ -4,3 +4,4 @@ dist
 build
 dev-dist
 /.svelte-kit
+.env
