@@ -8,18 +8,21 @@ datasource db {
 }
 
 model notes {
-  id      Int    @id(map: "notes_pk") @default(autoincrement())
-  body    String
-  user_id Int
-  users   users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notes_fk")
+  id        Int      @id @unique @default(autoincrement())
+  body      String
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user_id   String
+
+  @@map("notes")
 }
 
 model users {
-  id       Int     @id(map: "users_pk") @default(autoincrement())
-  name     String  @db.VarChar
-  password String  @db.VarChar
-  email    String  @db.VarChar
-  notes    notes[]
+  id        Int      @id @unique @default(autoincrement())
+  email     String
+  auth_user AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user_id   String
+
+  @@map("users")
 }
 
 model AuthUser {
@@ -28,6 +31,8 @@ model AuthUser {
   auth_key     AuthKey[]
   // here you can add custom fields for your user
   // e.g. name, email, username, roles, etc.
+  users        users[]
+  notes        notes[]
   name         String
 
   @@map("auth_user")
@@ -35,9 +40,9 @@ model AuthUser {
 
 model AuthSession {
   id             String   @id @unique
-  user_id        String
   active_expires BigInt
   idle_expires   BigInt
+  user_id        String
   auth_user      AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])
@@ -47,9 +52,9 @@ model AuthSession {
 model AuthKey {
   id              String   @id @unique
   hashed_password String?
-  user_id         String
   primary_key     Boolean
   expires         BigInt?
+  user_id         String
   auth_user       AuthUser @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])

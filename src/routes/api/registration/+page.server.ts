@@ -3,6 +3,8 @@ import { auth } from "$lib/server/lucia";
 import { trimFormField, validateStr, validateEmail } from "$lib/functions";
 import type { Actions } from "./$types";
 
+import { prisma } from "$lib/prisma";
+
 export type IErrors = {
   desc?: string;
   name?: string;
@@ -46,7 +48,7 @@ export const actions = {
     }
 
     try {
-      const user = await auth.createUser({
+      const auth_user = await auth.createUser({
         primaryKey: {
           providerId: "name",
           providerUserId: name,
@@ -57,7 +59,14 @@ export const actions = {
         },
       });
 
-      const session = await auth.createSession(user.userId);
+      const user = await locals.prisma.users.create({
+        data: {
+          user_id: auth_user.userId,
+          email,
+        },
+      });
+
+      const session = await auth.createSession(auth_user.userId);
       locals.auth.setSession(session); // create session cookie
     } catch (err) {
       errors.name = "Username is already taken";

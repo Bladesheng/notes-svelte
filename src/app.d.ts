@@ -1,8 +1,10 @@
+import { prisma } from "$lib/prisma";
+
 declare global {
   namespace App {
     interface Locals {
       auth: import("lucia").AuthRequest;
-      prisma: PrismaClient;
+      prisma: typeof prisma; // to get the exact same types as the prisma instance
     }
   }
 }
