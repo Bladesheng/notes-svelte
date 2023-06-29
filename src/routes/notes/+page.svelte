@@ -1,14 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import NoteForm from "./NoteForm.svelte";
-  import type { PageData } from "./$types";
+  import NewNote from "$lib/forms/NewNote.svelte";
+  import { page } from "$app/stores";
 
-  export let data: PageData;
-
-  let dialog: HTMLDialogElement;
-  onMount(() => {
-    dialog = document.querySelector("dialog") as HTMLDialogElement;
-  });
+  let newNoteDialog: NewNote;
 </script>
 
 <svelte:head>
@@ -19,7 +13,7 @@
 
 <section>
   <ul>
-    {#each data.notes as note (note.id)}
+    {#each $page.data.notes as note (note.id)}
       <li>
         <a href={`/notes/${note.id}`}>{note.body}</a>
       </li>
@@ -27,15 +21,9 @@
   </ul>
 </section>
 
-<button
-  on:click={() => {
-    dialog.showModal();
-  }}
->
-  + Create Note
-</button>
+<button on:click={newNoteDialog.showModal}> + Create Note </button>
 
-<NoteForm />
+<NewNote bind:this={newNoteDialog} />
 
 <style>
 </style>

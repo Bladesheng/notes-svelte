@@ -3,6 +3,11 @@
   import { trimFormField, validateStr } from "$lib/functions";
 
   let dialog: HTMLDialogElement;
+
+  // to allow opening dialog from outside
+  export function showModal() {
+    dialog.showModal();
+  }
 </script>
 
 <dialog bind:this={dialog}>

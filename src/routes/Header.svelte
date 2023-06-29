@@ -13,9 +13,11 @@
       <li>
         <a class:selected={$page.route.id === "/about"} href="{base}/about">About</a>
       </li>
-      <li>
-        <a class:selected={$page.route.id === "/notes"} href="{base}/notes">Notes</a>
-      </li>
+      {#if $page.data.user}
+        <li>
+          <a class:selected={$page.route.id === "/notes"} href="{base}/notes">Notes</a>
+        </li>
+      {/if}
       <li>
         <a class:selected={$page.route.id === "/contact"} href="{base}/contact">Contact</a>
       </li>
