@@ -3,8 +3,6 @@ import { auth } from "$lib/server/lucia";
 import { trimFormField, validateStr, validateEmail } from "$lib/functions";
 import type { Actions } from "./$types";
 
-import { prisma } from "$lib/prisma";
-
 export type IErrors = {
   desc?: string;
   name?: string;
