@@ -1,8 +1,8 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { page } from "$app/stores";
-  import Login from "$lib/forms/Register.svelte";
-  import Register from "$lib/forms/Login.svelte";
+  import Register from "$lib/forms/Register.svelte";
+  import Login from "$lib/forms/Login.svelte";
 
   let loginDialog: Login;
   let registerDialog: Register;
