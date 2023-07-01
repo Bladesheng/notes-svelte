@@ -2,26 +2,26 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import UserMenu from "$lib/UserMenu.svelte";
+
+  $: route = $page.route.id;
 </script>
 
 <header>
   <nav>
-    <ol>
-      <li>
-        <a class:selected={$page.route.id === "/"} href="{base}/">Home</a>
-      </li>
-      <li>
-        <a class:selected={$page.route.id === "/about"} href="{base}/about">About</a>
-      </li>
-      {#if $page.data.user}
-        <li>
-          <a class:selected={$page.route.id === "/notes"} href="{base}/notes">Notes</a>
-        </li>
-      {/if}
-      <li>
-        <a class:selected={$page.route.id === "/contact"} href="{base}/contact">Contact</a>
-      </li>
-    </ol>
+    <a href="{base}/" class:selected={route === "/"}>
+      <span>Home</span>
+    </a>
+    <a href="{base}/about" class:selected={route === "/about"}>
+      <span>About</span>
+    </a>
+    {#if $page.data.user}
+      <a href="{base}/notes" class:selected={route === "/(authed)/notes"}>
+        <span>Notes</span>
+      </a>
+    {/if}
+    <a href="{base}/contact" class:selected={route === "/contact"}>
+      <span>Contact</span>
+    </a>
   </nav>
 
   <UserMenu />
@@ -29,39 +29,45 @@
 
 <style>
   header {
-    padding-top: 1rem;
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+
+    padding: 0px 16px;
+
+    background-color: var(--color-primary);
   }
 
   nav {
     grid-column: 2 / 3;
-  }
 
-  ol {
+    height: 100%;
+
     display: flex;
-
     justify-content: center;
-    gap: 16px;
+    align-items: stretch;
   }
 
+  /* Unselected */
   a {
-    font-size: 1.1rem;
-    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 16px;
 
-    color: var(--font-color-primary);
     border-bottom: 2px solid transparent; /* stops buttons from moving when mousing over them */
+
+    font-size: 1.1rem;
+    color: var(--font-color-primary);
   }
   a.selected {
-    color: var(--font-color-secondary);
     border-bottom: 2px solid var(--font-color-secondary) !important;
+    color: var(--font-color-secondary);
   }
   a:hover {
     border-bottom: 2px solid var(--font-color-primary);
   }
   a:active {
-    color: var(--font-color-blue) !important;
     border-bottom: 2px solid var(--font-color-blue) !important;
+    color: var(--font-color-blue) !important;
   }
 </style>

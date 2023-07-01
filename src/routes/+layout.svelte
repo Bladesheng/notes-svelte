@@ -30,7 +30,7 @@
 
     font-family: var(--font-stack);
     color: var(--font-color-primary);
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
   }
 
   main {

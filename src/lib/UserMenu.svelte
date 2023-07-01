@@ -10,15 +10,25 @@
 
 <div class="user-menu">
   {#if $page.data.user}
+    <form action="/api/session?/destroy" method="post" use:enhance>
+      <button type="submit">
+        <img src="/icons/logout.svg" alt="logout" />
+        Sign out
+      </button>
+    </form>
+
     <span>{$page.data.user.name}</span>
 
-    <form action="/api/session?/destroy" method="post" use:enhance>
-      <button type="submit">Log Out</button>
-    </form>
+    <img class="profilePic" src="clown.jpg" alt="you" />
   {:else}
-    <button on:click={loginDialog.showModal}>Log In</button>
-
-    <button on:click={registerDialog.showModal}>Register</button>
+    <button on:click={loginDialog.showModal}>
+      <img src="/icons/login.svg" alt="logout" />
+      Sign in
+    </button>
+    <button on:click={registerDialog.showModal}>
+      <img src="/icons/register.svg" alt="logout" />
+      Create account
+    </button>
   {/if}
 </div>
 
@@ -32,6 +42,13 @@
 
     display: flex;
     align-items: center;
-    margin-right: 16px;
+
+    gap: 16px;
+    padding: 8px 0px;
+  }
+
+  img.profilePic {
+    height: 32px;
+    border-radius: 50%;
   }
 </style>
