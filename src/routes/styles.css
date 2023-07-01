@@ -42,7 +42,8 @@ button > img {
   filter: var(--font-color-primary-filter);
 }
 
-input {
+input,
+textarea {
   font-family: var(--font-stack);
   border: none;
   outline: none;

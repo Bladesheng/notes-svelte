@@ -34,38 +34,34 @@
       };
     }}
   >
-    <h1>Create New Account</h1>
-
-    {#if form?.errors?.name}
-      <p>{form.errors.name}</p>
-    {/if}
-    <label for="name">Name</label>
-    <input type="text" name="name" value={form?.name ?? ""} />
-
-    {#if form?.errors?.password}
-      <p>{form.errors.password}</p>
-    {/if}
-    <label for="password">Password</label>
-    <input type="password" name="password" />
-
-    {#if form?.errors?.email}
-      <p>{form.errors.email}</p>
-    {/if}
-    <label for="email">Email adress</label>
-    <input type="email" name="email" value={form?.email ?? ""} />
-
-    <div>
-      <button type="submit">Register</button>
+    <header>
+      <h2>Create new account</h2>
 
       <button
+        class="close"
         type="reset"
         on:click={() => {
           dialog.close();
+          form = {}; // remove error messages
         }}
       >
-        Cancel
+        <img src="/icons/close.png" alt="close" />
       </button>
-    </div>
+    </header>
+
+    <label for="name">Name</label>
+    <input type="text" name="name" value={form?.name ?? ""} />
+    <p>{form?.errors?.name ?? ""}</p>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" />
+    <p>{form?.errors?.password ?? ""}</p>
+
+    <label for="email">Email adress</label>
+    <input type="email" name="email" value={form?.email ?? ""} />
+    <p>{form?.errors?.email ?? ""}</p>
+
+    <button type="submit" class="submit">Register</button>
   </form>
 </dialog>
 
@@ -76,25 +72,79 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
+    width: max(18vw, 250px);
+    border: none;
+    border-radius: 16px;
+
     font-family: var(--font-stack);
     color: var(--font-color-primary);
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
   }
   dialog::backdrop {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
-    animation: fade-in 200ms;
-  }
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    background: rgba(0, 0, 0, 0.6);
   }
 
   form {
     display: flex;
     flex-direction: column;
+
+    padding: 16px;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+
+  h2 {
+    grid-column: 2 / 3;
+    font-size: 1.2rem;
+  }
+
+  header > button {
+    justify-self: end;
+    width: 1rem;
+
+    background-color: transparent;
+  }
+  header > button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  label {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  input {
+    padding: 16px;
+    font-size: 1rem;
+
+    border: 2px solid var(--color-grey-light);
+    border-radius: 4px;
+
+    background-color: var(--color-primary);
+    color: var(--font-color-secondary);
+  }
+  input:focus {
+    border: 2px solid var(--font-color-blue);
+  }
+
+  p {
+    height: 3rem;
+
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    color: var(--font-color-red);
+  }
+
+  .submit {
+    align-self: center;
+    width: 100%;
+
+    background-color: var(--font-color-blue);
+    color: var(--color-black);
   }
 </style>
