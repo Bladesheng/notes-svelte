@@ -1,8 +1,14 @@
 :root {
   --font-stack: "Roboto", sans-serif;
 
+  /* https://codepen.io/sosuke/pen/Pjoqqp */
+
   --font-color-primary: rgb(139, 148, 158);
+  --font-color-primary-filter: invert(70%) sepia(16%) saturate(227%) hue-rotate(171deg)
+    brightness(82%) contrast(82%);
   --font-color-secondary: rgb(240, 246, 252);
+  --font-color-secondary-filter: invert(80%) sepia(16%) saturate(80%) hue-rotate(175deg)
+    brightness(118%) contrast(98%);
   --font-color-blue: rgb(88, 166, 255);
   --font-color-red: rgb(248, 81, 73);
 
