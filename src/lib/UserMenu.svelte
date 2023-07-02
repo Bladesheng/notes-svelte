@@ -19,7 +19,7 @@
 
     <span>{$page.data.user.name}</span>
 
-    <img class="profilePic" src="clown.jpg" alt="you" />
+    <img class="profilePic" src="/clown.jpg" alt="you" />
   {:else}
     <button on:click={loginDialog.showModal}>
       <img src="/icons/login.svg" alt="logout" />
