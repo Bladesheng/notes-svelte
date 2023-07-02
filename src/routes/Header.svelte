@@ -15,7 +15,10 @@
       <span>About</span>
     </a>
     {#if $page.data.user}
-      <a href="{base}/notes" class:selected={route === "/(authed)/notes"}>
+      <a
+        href="{base}/notes"
+        class:selected={route === "/(authed)/notes" || route === "/(authed)/notes/[slug]"}
+      >
         <span>Notes</span>
       </a>
     {/if}
