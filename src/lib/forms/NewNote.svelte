@@ -33,7 +33,7 @@
           dialog.close();
         }}
       >
-        <img src="/icons/close.png" alt="close" />
+        <img src="/icons/close.svg" alt="close" />
       </button>
     </header>
 
