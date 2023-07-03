@@ -1,70 +1,7 @@
+@layer base, someOtherLayer;
+
 /* todo: host fonts locally */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@400;500;700&display=swap");
 
 @import "$styles/variables.css";
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  gap: 8px;
-
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: var(--color-grey-dark);
-  color: var(--font-color-primary);
-
-  font-family: var(--font-stack);
-  font-size: 1rem;
-
-  width: fit-content;
-  height: 2rem;
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-
-  &:hover {
-    filter: brightness(1.2);
-  }
-
-  &:active {
-    filter: brightness(1.4) !important;
-  }
-
-  & > img {
-    height: 1.2rem;
-    filter: var(--font-color-primary-filter);
-  }
-}
-
-input,
-textarea {
-  font-family: var(--font-stack);
-  border: none;
-  outline: none;
-}
-
-ol,
-ul {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
+@import "$styles/base.css";
