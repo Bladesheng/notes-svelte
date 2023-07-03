@@ -28,7 +28,7 @@
 
 <NewNote bind:this={newNoteDialog} />
 
-<style>
+<style lang="postcss">
   ul {
     display: flex;
     flex-direction: column;
@@ -40,12 +40,14 @@
   li {
     border-radius: 8px;
     background-color: var(--color-primary);
-  }
-  li:hover {
-    filter: brightness(1.1);
-  }
-  li:active {
-    filter: brightness(1.3) !important;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:active {
+      filter: brightness(1.3) !important;
+    }
   }
 
   a {
@@ -68,9 +70,9 @@
 
     background-color: var(--color-green-dark);
     color: var(--font-color-secondary);
-  }
 
-  button > img {
-    filter: var(--font-color-secondary-filter);
+    & > img {
+      filter: var(--font-color-secondary-filter);
+    }
   }
 </style>

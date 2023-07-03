@@ -30,16 +30,19 @@ button {
   height: 2rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-}
-button:hover {
-  filter: brightness(1.2);
-}
-button:active {
-  filter: brightness(1.4) !important;
-}
-button > img {
-  height: 1.2rem;
-  filter: var(--font-color-primary-filter);
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &:active {
+    filter: brightness(1.4) !important;
+  }
+
+  & > img {
+    height: 1.2rem;
+    filter: var(--font-color-primary-filter);
+  }
 }
 
 input,

@@ -83,7 +83,7 @@
   {/if}
 </form>
 
-<style>
+<style lang="postcss">
   header {
     display: flex;
     justify-content: flex-start;
@@ -98,13 +98,16 @@
   .back {
     background-color: transparent;
     width: 1rem;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
   }
 
-  .back:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-  .delete:hover {
-    background-color: var(--color-red);
+  .delete {
+    &:hover {
+      background-color: var(--color-red);
+    }
   }
 
   form.edit {
@@ -137,8 +140,9 @@
   .save {
     background-color: var(--color-green-dark);
     color: var(--font-color-secondary);
-  }
-  .save > img {
-    filter: var(--font-color-secondary-filter);
+
+    & > img {
+      filter: var(--font-color-secondary-filter);
+    }
   }
 </style>
