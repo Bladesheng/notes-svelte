@@ -29,7 +29,7 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/notes-svelte?schema=
 npm install
 ```
 
-- Push the Prisma scheme to the database:
+- Push the Prisma schema to the database:
 
 ```
 npm run db:push
