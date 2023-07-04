@@ -1,6 +1,8 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import type { FormData } from "$api/types";
+  import toast from "svelte-french-toast";
+  import { toastOptions } from "$lib/toasts";
 
   // form data returned from server form action
   let form: FormData;
@@ -27,10 +29,12 @@
           // is also sent to /api/.../+page.svelte which is the only place where you can use $page.form.
           // This is the only way to acces form data from anywhere else.
           form = result.data;
+          toast.error("Error has occured", toastOptions.err);
         } else {
           dialog.close();
-          update();
+          toast.success("Account created", toastOptions.ok);
         }
+        update();
       };
     }}
   >

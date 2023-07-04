@@ -1,6 +1,6 @@
 <script lang="ts">
   import "./styles.css";
-
+  import { Toaster } from "svelte-french-toast";
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";
 </script>
@@ -11,6 +11,8 @@
   <main>
     <slot />
   </main>
+
+  <Toaster />
 
   <Footer />
 </div>

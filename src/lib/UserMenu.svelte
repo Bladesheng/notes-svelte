@@ -3,6 +3,8 @@
   import { page } from "$app/stores";
   import Register from "$lib/forms/Register.svelte";
   import Login from "$lib/forms/Login.svelte";
+  import toast from "svelte-french-toast";
+  import { toastOptions } from "$lib/toasts";
 
   let loginDialog: Login;
   let registerDialog: Register;
@@ -10,7 +12,20 @@
 
 <div class="user-menu">
   {#if $page.data.user}
-    <form action="/api/session?/destroy" method="post" use:enhance>
+    <form
+      action="/api/session?/destroy"
+      method="post"
+      use:enhance={() => {
+        return async ({ update, result }) => {
+          if (result.type === "redirect") {
+            toast.success("Bye Felicia", toastOptions.ok);
+          } else {
+            toast.error("Error has occured", toastOptions.err);
+          }
+          update();
+        };
+      }}
+    >
       <button type="submit">
         <img src="/icons/logout.svg" alt="logout" />
         Sign out

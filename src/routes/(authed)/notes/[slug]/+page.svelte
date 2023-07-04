@@ -2,6 +2,8 @@
   import { enhance } from "$app/forms";
   import { trimFormField, validateStr } from "$lib/functions";
   import { page } from "$app/stores";
+  import toast from "svelte-french-toast";
+  import { toastOptions } from "$lib/toasts";
 
   let currentBody = $page.data.note?.body;
 
@@ -38,7 +40,20 @@
 
   <h1>Note</h1>
 
-  <form action="?/delete" method="post" use:enhance>
+  <form
+    action="?/delete"
+    method="post"
+    use:enhance={() => {
+      return async ({ result, update }) => {
+        if (result.type === "redirect") {
+          toast.success("Note deleted", toastOptions.ok);
+        } else {
+          toast.error("Error has occured", toastOptions.err);
+        }
+        update();
+      };
+    }}
+  >
     <button type="submit" class="redHover">
       <img src="/icons/delete.svg" alt="delete" />
       Delete note
@@ -57,9 +72,19 @@
     if (!validateStr(bodyTrimmed) || bodyTrimmed === $page.data.note?.body) {
       cancelEdit();
       cancel();
+      toast.success("Note saved (no changes)", toastOptions.ok);
     }
 
     endEdit();
+
+    return async ({ result, update }) => {
+      if (result.type === "success") {
+        toast.success("Note created", toastOptions.ok);
+      } else {
+        toast.error("Error has occured", toastOptions.err);
+      }
+      update();
+    };
   }}
 >
   {#if editing}
