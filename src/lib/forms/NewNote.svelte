@@ -1,6 +1,8 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { trimFormField, validateStr } from "$lib/functions";
+  import toast from "svelte-french-toast";
+  import { toastOptions } from "$lib/toasts";
 
   let dialog: HTMLDialogElement;
 
@@ -21,6 +23,15 @@
         formElement.reset();
         cancel();
       }
+
+      return async ({ update, result }) => {
+        if (result.type === "success") {
+          toast.success("Note created", toastOptions.ok);
+        } else {
+          toast.error("Error has occured", toastOptions.err);
+        }
+        update();
+      };
     }}
   >
     <header>

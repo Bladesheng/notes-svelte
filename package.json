@@ -41,7 +41,8 @@
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^2.0.0",
     "@prisma/client": "^4.16.1",
-    "lucia-auth": "^1.8.0"
+    "lucia-auth": "^1.8.0",
+    "svelte-french-toast": "^1.1.0"
   },
   "engines": {
     "node": ">=18.14.2"
