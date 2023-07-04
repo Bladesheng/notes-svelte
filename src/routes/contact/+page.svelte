@@ -31,6 +31,8 @@
   Random dog picture
 </button>
 
+<a href="https://dog.ceo/dog-api/" target="_blank">(source)</a>
+
 {#if dogUrl}
   <div class="wrapper">
     <img src={dogUrl} alt="dog" />
@@ -38,6 +40,14 @@
 {/if}
 
 <style>
+  button {
+    display: inline;
+  }
+
+  a {
+    color: var(--font-color-blue);
+  }
+
   .wrapper {
     width: 100%;
     height: 60vh;
@@ -45,10 +55,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
 
-  img {
-    max-width: 100%;
-    max-height: 100%;
+    & > img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 </style>
