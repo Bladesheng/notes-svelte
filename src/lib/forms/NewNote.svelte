@@ -27,7 +27,7 @@
       <h2>New note</h2>
 
       <button
-        class="close"
+        class="roundIcon"
         type="reset"
         on:click={() => {
           dialog.close();
@@ -40,7 +40,7 @@
     <textarea name="body" rows="3" cols="30" placeholder="Here's an idea for a note..." />
 
     <button
-      class="submit"
+      class="blue"
       type="submit"
       on:click={() => {
         dialog.close();

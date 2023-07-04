@@ -38,7 +38,7 @@
       <h2>Create new account</h2>
 
       <button
-        class="close"
+        class="roundIcon"
         type="reset"
         on:click={() => {
           dialog.close();
@@ -61,7 +61,7 @@
     <input type="email" name="email" value={form?.email ?? ""} />
     <p>{form?.errors?.email ?? ""}</p>
 
-    <button type="submit" class="submit">Register</button>
+    <button type="submit" class="blue">Register</button>
   </form>
 </dialog>
 

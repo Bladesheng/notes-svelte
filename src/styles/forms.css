@@ -33,13 +33,6 @@ header {
 
   & > button {
     justify-self: end;
-    width: 1rem;
-
-    background-color: transparent;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
   }
 }
 
@@ -79,10 +72,7 @@ p {
   color: var(--font-color-red);
 }
 
-.submit {
+button.blue {
   align-self: center;
   width: 100%;
-
-  background-color: var(--font-color-blue);
-  color: var(--color-black);
 }

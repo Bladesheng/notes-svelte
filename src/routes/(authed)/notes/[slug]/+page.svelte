@@ -31,7 +31,7 @@
 
 <header>
   <a href="/notes" data-sveltekit-preload-data="off">
-    <button class="back">
+    <button class="roundIcon">
       <img src="/icons/back.svg" alt="back" />
     </button>
   </a>
@@ -39,7 +39,7 @@
   <h1>Note</h1>
 
   <form action="?/delete" method="post" use:enhance>
-    <button type="submit" class="delete">
+    <button type="submit" class="redHover">
       <img src="/icons/delete.svg" alt="delete" />
       Delete note
     </button>
@@ -65,7 +65,7 @@
   {#if editing}
     <input type="text" name="body" bind:value={currentBody} use:autofocus />
     <div class="controls">
-      <button type="submit" class="save">
+      <button type="submit" class="green">
         <img src="/icons/save.svg" alt="save" />
         Save
       </button>
@@ -95,21 +95,6 @@
     margin-left: auto;
   }
 
-  .back {
-    background-color: transparent;
-    width: 1rem;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-  }
-
-  .delete {
-    &:hover {
-      background-color: var(--color-red);
-    }
-  }
-
   form.edit {
     display: flex;
     flex-direction: column;
@@ -136,13 +121,5 @@
   .controls {
     display: flex;
     gap: 8px;
-  }
-  .save {
-    background-color: var(--color-green-dark);
-    color: var(--font-color-secondary);
-
-    & > img {
-      filter: var(--font-color-secondary-filter);
-    }
   }
 </style>

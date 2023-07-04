@@ -38,7 +38,7 @@
       <h2>Sign in</h2>
 
       <button
-        class="close"
+        class="roundIcon"
         type="reset"
         on:click={() => {
           dialog.close();
@@ -57,7 +57,7 @@
     <input type="password" name="password" id="password" />
     <p>{form?.errors?.password ?? ""}</p>
 
-    <button type="submit" class="submit">Login</button>
+    <button type="submit" class="blue">Login</button>
   </form>
 </dialog>
 

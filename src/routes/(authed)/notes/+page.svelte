@@ -21,7 +21,7 @@
   </ul>
 </section>
 
-<button on:click={newNoteDialog.showModal}>
+<button class="green" on:click={newNoteDialog.showModal}>
   <img src="/icons/add.svg" alt="add" />
   New note
 </button>
@@ -67,12 +67,5 @@
     border-radius: 8px;
     padding: 20px 16px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-    background-color: var(--color-green-dark);
-    color: var(--font-color-secondary);
-
-    & > img {
-      filter: var(--font-color-secondary-filter);
-    }
   }
 </style>
