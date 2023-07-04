@@ -1,0 +1,31 @@
+@layer base {
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  input,
+  textarea {
+    font-family: var(--font-stack);
+    border: none;
+    outline: none;
+  }
+
+  ol,
+  ul {
+    list-style-type: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

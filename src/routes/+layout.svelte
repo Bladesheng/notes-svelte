@@ -37,7 +37,4 @@
     flex: 1 1 auto;
     padding: 4vw;
   }
-
-  @media (max-width: 680px) {
-  }
 </style>

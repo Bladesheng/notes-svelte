@@ -21,14 +21,14 @@
   </ul>
 </section>
 
-<button on:click={newNoteDialog.showModal}>
+<button class="green" on:click={newNoteDialog.showModal}>
   <img src="/icons/add.svg" alt="add" />
   New note
 </button>
 
 <NewNote bind:this={newNoteDialog} />
 
-<style>
+<style lang="postcss">
   ul {
     display: flex;
     flex-direction: column;
@@ -40,12 +40,14 @@
   li {
     border-radius: 8px;
     background-color: var(--color-primary);
-  }
-  li:hover {
-    filter: brightness(1.1);
-  }
-  li:active {
-    filter: brightness(1.3) !important;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+
+    &:active {
+      filter: brightness(1.3) !important;
+    }
   }
 
   a {
@@ -65,12 +67,5 @@
     border-radius: 8px;
     padding: 20px 16px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-    background-color: var(--color-green-dark);
-    color: var(--font-color-secondary);
-  }
-
-  button > img {
-    filter: var(--font-color-secondary-filter);
   }
 </style>

@@ -27,6 +27,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-svelte": "^2.31.1",
+    "postcss": "^8.4.24",
+    "postcss-preset-env": "^9.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-prisma": "^4.13.0",
     "prettier-plugin-svelte": "^2.10.1",

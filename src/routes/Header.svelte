@@ -30,7 +30,7 @@
   <UserMenu />
 </header>
 
-<style>
+<style lang="postcss">
   header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -61,16 +61,19 @@
 
     font-size: 1.1rem;
     color: var(--font-color-primary);
-  }
-  a.selected {
-    border-bottom: 2px solid var(--font-color-secondary) !important;
-    color: var(--font-color-secondary);
-  }
-  a:hover {
-    border-bottom: 2px solid var(--font-color-primary);
-  }
-  a:active {
-    border-bottom: 2px solid var(--font-color-blue) !important;
-    color: var(--font-color-blue) !important;
+
+    &.selected {
+      border-bottom: 2px solid var(--font-color-secondary) !important;
+      color: var(--font-color-secondary);
+    }
+
+    &:hover {
+      border-bottom: 2px solid var(--font-color-primary);
+    }
+
+    &:active {
+      border-bottom: 2px solid var(--font-color-blue) !important;
+      color: var(--font-color-blue) !important;
+    }
   }
 </style>
