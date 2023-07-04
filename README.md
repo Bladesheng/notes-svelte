@@ -4,7 +4,7 @@
 
 This is a very simple note taking app. You create an account and then you can create / edit / delete your own notes.
 
-This was my first shot at trying out server-side-rendering with some frontend framework (SvelteKit). I also did my first authentication, so that was pretty cool too.
+This was my first shot at trying out server-side-rendering with some frontend framework (SvelteKit). I also did my first authentication, so that was pretty cool too. Also i added toast notifications everywhere because why not.
 
 Technologies used:
 
